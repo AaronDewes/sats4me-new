@@ -16,6 +16,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        flex-wrap: wrap;
       }
       [v-cloak] {
         display: none !important;
@@ -24,6 +25,14 @@
         margin: 1em;
         flex: 1 1 0px;
         width: 0;
+        min-width: 250px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #242424;
+          color: white;
+        }
       }
     </style>
     <script src="/js/app.js"></script>

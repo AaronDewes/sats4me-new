@@ -2,6 +2,19 @@
   <div v-cloak id="root" :style="cssProps">
     <canvas id="confetti" ref="confetti"></canvas>
     <div class="logo">
+        <a href="https://sats4.me/" target="_blank" rel="noreferer noopener" class="sats4me-logo">
+          <svg
+            height="16"
+            viewBox="0 0 9.7799997 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style="vertical-align: top"
+          >
+            <g transform="matrix(.16 0 0 .16 -3.10992 0)" fill="#fff">
+              <path d="M 80.562,41.754 H 52.861 L 67.299,0 19.437,58.247 H 47.14 L 32.702,100 Z" fill="#fff"/>
+            </g>
+          </svg
+        ></a>
         <a href="https://widgets.twentyuno.net" target="_blank" rel="noreferer noopener">
           <svg
             width="16"
@@ -566,6 +579,10 @@ a.text-link, a.text-link:hover, a.text-link:visited, a.text-link:active {
 .qr-heading {
   text-align: center; 
   margin: 0;
+}
+
+.sats4me-logo {
+  padding-right: 0.75rem;
 }
 
 </style>
