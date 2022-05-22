@@ -1,4 +1,4 @@
-const host = "https://embed.twentyuno.net";
+const host = "https://sats4.me";
 
 function contrastingColor(color)
 {
@@ -20,12 +20,14 @@ function hexToRGB(color)
 }
 
 async function fetchInvoice(to, amount, comment) {
-  const response = await fetch(host + `/invoice?to=${to}&amount=${amount}&comment=${comment}`, {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-  });
+  let args = {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      // value is expected in msat later
+      body: JSON.stringify({ memo: comment, value: amount * 1000 })
+    };
+  const response = await fetch(host + `/${to}/v1/invoices`, args);
 
   if(!response.ok) {
     throw new Error(response.error);

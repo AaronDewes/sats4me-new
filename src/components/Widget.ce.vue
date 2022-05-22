@@ -166,7 +166,7 @@ export default {
   name: "LightningWidget",
   props: {
     name: { type: String, required: true },
-    to: { type: String, required: true, default: "reneaaron@getalby.com" },
+    to: { type: String, required: true, default: "bumi" },
     
     // Style
     image: { type: String, required: true },
@@ -219,11 +219,7 @@ export default {
     
     document.head.appendChild(fontImport);
 
-    // Keysend payments
-    if(this.to.match(/^[0-9a-fA-F]{66}$/i)) {
-      this.paymentType = "Keysend";
-    }
-    else if(this.debug) {
+    if(this.debug) {
       try {
         this.params = await fetchParams(this.to);
         console.log(this.params, this.to);
@@ -247,39 +243,6 @@ export default {
     },
     pay: async function() {
       await this['pay' + this.paymentType]();
-    },
-    payKeysend: async function() {
-      let error = false;
-
-      try {
-        this.loading = true;
-        
-        if (window.webln) {
-          await window.webln.enable();
-          await window.webln.keysend({
-              destination: this.to, 
-              amount: this.currentAmount,
-              customRecords: { 
-                  // https://docs.lightning.engineering/lightning-network-tools/lnd/send-messages-with-keysend
-                  34349334: this.comment 
-              }
-          });
-
-          this.step = 'thankyou';
-          this.celebrate();
-
-        } else {
-          error = true;
-        }
-      } catch (e) {
-        error = true;
-      } finally {
-        this.loading = false;
-      }
-
-      if(error) {
-        this.error("No wallet available", `You first need to install a browser extension.<br><br><a class="text-link" href="https://www.getalby.com" target="_blank" rel="noopener noreferrer">Learn more</a>`);
-      }
     },
     payInvoice: async function () {
       let webln;
